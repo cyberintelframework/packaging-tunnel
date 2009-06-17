@@ -1,0 +1,69 @@
+Template: surfids-tunnel/empty
+Type: Note
+Description: Input cannot be an empty string
+ You have to enter a value in the previous
+ question.
+
+Template: surfids-tunnel/keysize
+Type: Select
+Choices: 1024, 2048
+Default: 1024
+Description: OpenVPN keys size:
+ The key size determines the security of your OpenVPN setup.
+ .
+ A bigger key size usually means better security, but lower 
+ performance and vice versa. A 1024 key size should be 
+ sufficient.
+
+Template: surfids-tunnel/keycountry
+Type: String
+Description: Country abbreviation:
+ A 2 letter abbreviation of your country. This will be used 
+ for the C attribute of your certificates.
+
+Template: surfids-tunnel/keyprov
+Type: String
+Description: Province/state:
+ The name of the province or state you are located in. 
+ This will be used for the ST attribute of your certificates.
+
+Template: surfids-tunnel/keycity
+Type: String
+Description: City:
+ The city you are located in. This will be used for the 
+ L attribute of your certificates.
+
+Template: surfids-tunnel/keyorg
+Type: String
+Description: Organisation name:
+ The name of your organisation. This will be used for 
+ the O attribute of your certificates.
+
+Template: surfids-tunnel/keyemail
+Type: String
+Description: Email address:
+ Enter the email address of the administrator of this
+ server. This is used in the emailAddress attribute
+ of your certificates.
+
+Template: surfids-tunnel/hostname
+Type: String
+Description: Hostname:
+ The hostname is used in the certificate generation 
+ process. If this machine does not have a hostname
+ you can use it's IP address instead.
+
+Template: surfids-tunnel/xinetd
+Type: String
+Description: Xinetd listener address:
+ Enter the IP address on which xinetd should listen for 
+ incoming OpenVPN connections.
+
+Template: surfids-tunnel/htpasswd
+Type: Password
+Description: Password:
+ This password is used by the sensors for the communication
+ between the sensor and the server via php files. It's fed
+ to htpasswd to generate a .htpasswd file in your SURFids
+ root directory.
+

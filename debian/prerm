@@ -1,0 +1,62 @@
+#!/usr/bin/perl
+
+# 3.01 prompt
+# Function to prompt the user for input
+sub prompt() {
+  my ($promptstring, $defaultvalue);
+  ($promptstring,$defaultvalue) = @_;
+  if ($defaultvalue) {
+    #print $promptstring, "[", $defaultvalue, "]: ";
+    print $promptstring;
+  } else {
+    $defaultvalue = "";
+    print $promptstring;
+  }
+  $| = 1;       # force a flush after our print
+  $_ = <STDIN>; # get the input from STDIN
+
+  chomp;
+
+  if ("$defaultvalue") {
+    if ($_ eq "") {
+      return $defaultvalue;
+    } else {
+      return "$_";
+    }
+  } else {
+    return "$_";
+  }
+}
+
+if ($ARGV[0] ne "upgrade") {
+    `rm -rf /opt/surfnetids/log/* 2>/dev/null`;
+    `rm -f /opt/surfnetids/.htpasswd 2>/dev/null`;
+    if (-e "/opt/surfnetids/install_tn.pl.log") {
+        `rm -f /opt/surfnetids/install_tn.pl.log 2>/dev/null`;
+    }
+
+    $confirm = "a";
+    while ($confirm !~ /^(n|N|y|Y)$/) {
+        $confirm = &prompt("Do you want to keep your generated certificates? [yN]: ");
+    }
+    if ($confirm =~ /^(n|N)$/) {
+        `rm -f /opt/surfnetids/serverkeys/*.crt 2>/dev/null`;
+        `rm -f /opt/surfnetids/serverkeys/*.csr 2>/dev/null`;
+        `rm -f /opt/surfnetids/serverkeys/*.pem 2>/dev/null`;
+        `rm -f /opt/surfnetids/serverkeys/*.key 2>/dev/null`;
+        `rm -f /opt/surfnetids/genkeys/vars.conf 2>/dev/null`;
+    }
+
+    $confirm = "a";
+    while ($confirm !~ /^(n|N|y|Y)$/) {
+        $confirm = &prompt("Do you want to keep your tunnel server configuration file? [yN]: ");
+    }
+    if ($confirm =~ /^(n|N)$/) {
+        `rm -f /opt/surfnetids/serverkeys/*.crt 2>/dev/null`;
+        `rm -f /opt/surfnetids/serverkeys/*.csr 2>/dev/null`;
+        `rm -f /opt/surfnetids/serverkeys/*.pem 2>/dev/null`;
+        `rm -f /opt/surfnetids/serverkeys/*.key 2>/dev/null`;
+        `rm -f /opt/surfnetids/genkeys/vars.conf 2>/dev/null`;
+    }
+}
+`rm -f /opt/surfnetids/tunnel-debinstall.log 2>/dev/null`;
