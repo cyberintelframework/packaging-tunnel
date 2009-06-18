@@ -1,0 +1,14 @@
+Source: surfids-tunnel
+Section: misc
+Priority: optional
+Maintainer: SURFids team (http://ids.surfnet.nl) <ids@surfnet.nl>
+Standards-Version: 3.7.2
+Build-Depends: debhelper (>= 5), cdbs
+
+Package: surfids-tunnel
+Architecture: all
+Depends: debconf (>= 0.2.26), xinetd, apache2, perl, libpq-dev, libclass-dbi-pg-perl, php5-pgsql, php5, rrdtool, librrds-perl, openvpn (<< 2.1), openssl, dhcp3-client, iproute, arping
+Priority: optional
+Description: The tunnel server for the SURFids framework
+ The tunnel server for the SURFids framework. 
+ Consists of the tunnel scripts.
