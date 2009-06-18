@@ -1,4 +1,4 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 
 use Switch;
 use Debconf::Client::ConfModule ':all';
@@ -352,6 +352,17 @@ if (! -e "/var/log/surfids.log") {
   `echo "" >> /var/log/surfids.log`;
 }
 `chown www-data:adm /var/log/surfids.log`; 
+
+$chk = `grep _unused_ /etc/iproute2/rt_tables | wc -l`;
+chomp($chk);
+if ($chk == 0) {
+    my $ni = `tail -1 /etc/iproute2/rt_tables | awk '{print \$1}'`;
+    chomp($ni);
+    $ni++;
+    if ($ni < 1001) {
+        `echo "1000         _unused_" >> /etc/iproute2/rt_tables`;
+    }
+}
 
 reset("surfids-tunnel/htpasswd");
 
