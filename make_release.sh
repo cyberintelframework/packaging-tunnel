@@ -1,6 +1,6 @@
 #!/bin/sh
 
-KEYID=0000000
+KEYID=91987C36
 MAKEROOT=/home/build/tunnel
 DIST=lenny
 REPOSITORY=/opt/surfnetids/repositories/surfids
@@ -32,6 +32,8 @@ cp -R ./* $MAKEROOT/$PACKAGE/opt/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/dhclient.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/surfnetids-tn.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/surfnetids-tn-apache.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
+mv $MAKEROOT/$PACKAGE/opt/surfnetids/scripts/surfnetids-dhclient.dist $MAKEROOT/$PACKAGE/opt/surfnetids/scripts/surfnetids-dhclient
+rm -rf $MAKEROOT/$PACKAGE/opt/surfnetids/updates
 rm -rf $MAKEROOT/trunk
 cd $MAKEROOT/$PACKAGE
 
