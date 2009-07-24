@@ -307,8 +307,17 @@ if (! -e "$ssldir/key.pem") {
 ##########################################
 ##########################################
 
+# Checking the apache2 ports.conf file for the correct listening port (4443)
+$chk = `cat /etc/apache2/ports.conf | grep -v '^#.*\$' | grep 4443 | wc -l 2>/dev/null`;
+chomp($chk);
+
+if ($chk == 0) {
+    `echo "Listen $xinetd:4443" >> /etc/apache2/ports.conf 2>>$logfile`;
+}
+
 `/etc/init.d/apache2 restart 2>>$logfile`;
 
+# Setting up permissions
 `chmod 777 $targetdir/clientkeys/ 2>>$logfile`;
 `chmod 777 $targetdir/serverkeys/ 2>>$logfile`;
 `chmod +r $targetdir/serverkeys/ca.key 2>>$logfile`;
