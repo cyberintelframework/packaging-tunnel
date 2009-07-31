@@ -28,13 +28,19 @@ fi
 #  svn co http://svn.ids.surfnet.nl/surfids/logserver/trunk
 svn export http://svn.ids.surfnet.nl/surfids/tunnel/trunk $MAKEROOT/trunk/
 cd $MAKEROOT/trunk
+rm -rf $MAKEROOT/$PACKAGE/opt/surfnetids/
+mkdir $MAKEROOT/$PACKAGE/opt/surfnetids/
 cp -R ./* $MAKEROOT/$PACKAGE/opt/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/dhclient.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/surfnetids-tn.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/surfnetids-tn-apache.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/scripts/surfnetids-dhclient.dist $MAKEROOT/$PACKAGE/opt/surfnetids/scripts/surfnetids-dhclient
-rm -rf $MAKEROOT/$PACKAGE/opt/surfnetids/updates
+chmod -x $MAKEROOT/$PACKAGE/etc/surfnetids/dhclient.conf
+chmod -x $MAKEROOT/$PACKAGE/etc/surfnetids/surfnetids-tn-apache.conf
+chmod -x $MAKEROOT/$PACKAGE/opt/surfnetids/openvpn-server.conf
+chmod -x $MAKEROOT/$PACKAGE/opt/surfnetids/crontab.tn
 rm -rf $MAKEROOT/trunk
+
 cd $MAKEROOT/$PACKAGE
 
 # Increment changelog entry
