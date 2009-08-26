@@ -162,6 +162,12 @@ if (! -e "$targetdir/serverkeys/serial.old") {
   `echo "00" > $targetdir/serverkeys/serial.old 2>>$logfile`;
 }
 
+$perl = `grep perl $targetdir/genkeys/vars.conf | wc -l`;
+chomp($perl);
+if ($perl == 0) {
+    `mv -f $targetdir/genkeys/vars.conf $targetdir/genkeys/old_vars.conf  2>>$logfile`;
+}
+
 if (! -e "$targetdir/genkeys/vars.conf") {
     `cp $targetdir/genkeys/vars.conf.dist $targetdir/genkeys/vars.conf`;
 
@@ -239,6 +245,7 @@ print XINETD "\}\n";
 close(XINETD);
 
 `mv $targetdir/xinetd.openvpn /etc/xinetd.d/openvpn 2>>$logfile`;
+`/etc/init.d/xinetd restart 2>>$logfile`;
 
 # Setting up openvpn config
 open(OPENVPN, ">>$targetdir/openvpn-server.conf");
