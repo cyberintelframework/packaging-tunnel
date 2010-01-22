@@ -7,7 +7,7 @@ Build-Depends: debhelper (>= 5), cdbs
 
 Package: surfids-tunnel
 Architecture: all
-Depends: debconf (>= 0.2.26), vlan, xinetd, apache2, perl, libpq-dev, libclass-dbi-pg-perl, php5-pgsql, php5, rrdtool, librrds-perl, openvpn (<= 2.0.9-4etch1), openssl, dhcp3-client, iproute, arping
+Depends: debconf (>= 0.2.26), vlan, xinetd, apache2, perl, libpq-dev, libclass-dbi-pg-perl, php5-pgsql, php5, rrdtool, librrds-perl, openvpn (<= 2.0.9-4etch1), openssl, dhcp3-client, iproute, arping, sendmail
 Conflicts: surfids-sensor, openvpn (>= 2.1~rc2-1)
 Priority: optional
 Description: The tunnel server for the SURFids framework
