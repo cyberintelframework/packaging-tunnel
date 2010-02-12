@@ -22,5 +22,5 @@ $sourcedir = "./SOURCES/surfids-$package-$version";
 `tar -cvzf ./SOURCES/surfids-$package-$version.tar.gz $sourcedir/`;
 
 # Building RPM
-`rpmbuild -ba ./SPECS/surfids-tunnel.spec`;
+`rpmbuild -ba ./SPECS/surfids-$package.spec`;
 
