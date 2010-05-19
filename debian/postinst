@@ -380,6 +380,10 @@ if ($chk == 0) {
     }
 }
 
+# Setting up reset_sensors_db.pl as init script and add to rc
+`cp $targetdir/tntools/reset_sensors_db.pl /etc/init.d/surfids-reset-sensors 2>>$logfile`;
+`update-rc.d surfids-reset-sensors start 99 2 3 4 5 . 2>>$logfile`;
+
 reset("surfids-tunnel/htpasswd");
 
 close(LOG);
