@@ -60,3 +60,9 @@ if ($ARGV[0] ne "upgrade") {
     }
 }
 `rm -f /opt/surfnetids/tunnel-debinstall.log 2>/dev/null`;
+
+# Removing reset_sensors_db.pl from init and rc if exists
+`update-rc.d surfids-reset-sensors remove 2>/dev/null`;
+if (-e "/etc/init.d/surfids-reset-sensors") {
+    `rm -f /etc/init.d/surfids-reset-sensors 2>/dev/null`;
+}
