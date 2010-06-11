@@ -68,4 +68,4 @@ debsign -k$KEYID ${PACKAGE}_*_i386.changes
 
 # add package to repository
 cd $REPOSITORY
-sudo reprepro include $DIST $MAKEROOT/$PACKAGE_*_i386.changes
+sudo reprepro --keepunreferencedfiles include $DIST $MAKEROOT/$PACKAGE_*_i386.changes
