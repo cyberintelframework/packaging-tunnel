@@ -60,7 +60,7 @@ Description: Xinetd listener address:
  incoming OpenVPN connections.
 
 Template: surfids-tunnel/htpasswd
-Type: Password
+Type: String
 Description: Password:
  This password is used by the sensors for the communication
  between the sensor and the server via php files. It's fed

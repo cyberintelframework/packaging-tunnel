@@ -20,6 +20,9 @@ $ts = time();
 version('2.0');
 my $capb=capb('backup');
 
+# Make sure password is reset
+reset("surfids-tunnel/htpasswd");
+
 # Setting up state machine for debconf to use
 $state = 1;
 $redo = 0;
@@ -284,7 +287,9 @@ if (! -e "$apachesite/surfids-tunnel.conf") {
 }
 
 # Setting up apache authentication
-`htpasswd -b -c -m $targetdir/.htpasswd idssensor $htpasswd 2>>$logfile`;
+if (! -e "$targetdir/.htpasswd") {
+    `htpasswd -b -c -m $targetdir/.htpasswd idssensor $htpasswd 2>>$logfile`;
+}
 
 ##########################################
 ##########################################
