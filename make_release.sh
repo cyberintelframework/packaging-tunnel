@@ -29,7 +29,7 @@ fi
 svn export http://svn.ids.surfnet.nl/surfids/tunnel/trunk $MAKEROOT/trunk/
 cd $MAKEROOT/trunk
 rm -rf $MAKEROOT/$PACKAGE/opt/surfnetids/
-mkdir $MAKEROOT/$PACKAGE/opt/surfnetids/
+mkdir -p $MAKEROOT/$PACKAGE/opt/surfnetids/
 cp -R ./* $MAKEROOT/$PACKAGE/opt/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/dhclient.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
 mv $MAKEROOT/$PACKAGE/opt/surfnetids/surfnetids-tn.conf $MAKEROOT/$PACKAGE/etc/surfnetids/
