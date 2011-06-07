@@ -33,8 +33,6 @@ mv -f %{_buildroot}%{surfinstall}/openvpn-server.conf %{_buildroot}%{surfconfig}
 
 # install important files
 install -m 644 %{_buildroot}%{surfinstall}/tunnel-cron.d %{_buildroot}/etc/cron.d/surfids-tunnel
-touch %{_buildroot}/var/log/surfids.log
-chmod 640 %{_buildroot}/var/log/surfids.log
 
 %clean
 
