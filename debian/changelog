@@ -1,32 +1,18 @@
-surfids-tunnel (3.10.5) lenny; urgency=low
+surfids-tunnel (3.05) lenny; urgency=low
 
-  * 3.10-RC5
+  * Fixed an issue with an upgrade via apt-get and the htpasswd.
 
- -- SURFids Development Team <ids@surfnet.nl>  Tue, 07 Jun 2011 13:24:15 +0200
+ -- SURFids Development Team <ids@surfnet.nl>  Mon, 12 Jul 2010 18:21:57 +0200
 
-surfids-tunnel (3.10.4) lenny; urgency=low
+surfids-tunnel (3.04) lenny; urgency=low
 
-  * 3.10-RC4
+  * Fixed memory, traffic & CPU graphs
+  * Fixed bugs: 151, 182, 190, 193, 201, 204, 212
+  * Fixed bug in uptime query
+  * Added database RRD script
+  * Fixed reset_sensors_db script
 
- -- SURFids Development Team <ids@surfnet.nl>  Tue, 07 Jun 2011 13:05:43 +0200
-
-surfids-tunnel (3.10.3) lenny; urgency=low
-
-  * 3.10-RC3
-
- -- SURFids Development Team <ids@surfnet.nl>  Tue, 07 Jun 2011 11:38:34 +0200
-
-surfids-tunnel (3.10.2) lenny; urgency=low
-
-  * 3.10-RC2
-
- -- SURFids Development Team <ids@surfnet.nl>  Wed, 01 Jun 2011 17:11:11 +0200
-
-surfids-tunnel (3.10.1) lenny; urgency=low
-
-  * 3.10-RC1
-
- -- SURFids Development Team <ids@surfnet.nl>  Wed, 01 Jun 2011 16:46:26 +0200
+ -- SURFids Development Team <ids@surfnet.nl>  Fri,  7 May 2010 14:41:53 +0200
 
 surfids-tunnel (3.02) lenny; urgency=low
 
