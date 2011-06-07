@@ -371,12 +371,6 @@ if (-e "$targetdir/tunnel_remove.txt") {
   }
 }
 
-# Setting up surfids.log file
-if (! -e "/var/log/surfids.log") {
-  `echo "" >> /var/log/surfids.log`;
-}
-`chown www-data:adm /var/log/surfids.log`; 
-
 $chk = `grep _unused_ /etc/iproute2/rt_tables | wc -l`;
 chomp($chk);
 if ($chk == 0) {
@@ -395,6 +389,23 @@ if (-e "/etc/init.d/postgresql-8.3") {
     `update-rc.d -f postgresql-8.3 defaults 18 21 2>>$logfile`;
 }
 `update-rc.d surfids-reset-sensors start 19 2 3 4 5 . 2>>$logfile`;
+
+####
+# Setting up logrotate stuff
+####
+if (! -e "/etc/logrotate.d/surfids-tn") {
+    `ln -s $targetdir/logrotate.tn /etc/logrotate.d/surfids-tn 2>>$logfile`;
+}
+
+# Setting up surfids.log file
+if (! -e "/var/log/surfids/main.log") {
+  `touch /var/log/surfids/main.log`;
+}
+if (! -e "/var/log/surfids/apt.log") {
+  `touch /var/log/surfids/apt.log`;
+}
+`chown -R www-data:adm /var/log/surfids/`; 
+
 
 reset("surfids-tunnel/htpasswd");
 

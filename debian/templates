@@ -65,5 +65,5 @@ Description: Password:
  This password is used by the sensors for the communication
  between the sensor and the server via php files. It's fed
  to htpasswd to generate a .htpasswd file in your SURFids
- root directory.
-
+ root directory. If this is an upgrade, the .htpasswd file
+ is not changed.
