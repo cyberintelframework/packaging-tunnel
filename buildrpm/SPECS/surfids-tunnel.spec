@@ -1,13 +1,13 @@
 Summary: The tunnel server for the SURFids framework.
 Name: surfids-tunnel
-Version: 3.02
+Version: 3.10
 Release: 1%{?dist}
 License: GPL
 Group: Applications/Internet
-Source: surfids-tunnel-3.02.tar.gz
+Source: surfids-tunnel-3.10.tar.gz
 URL: http://ids.surfnet.nl/
 BuildRoot: /home/build/rpmbuild/surfids-tunnel/BUILDROOT/
-Requires: vconfig, xinetd, httpd, perl, php, php-pgsql, perl-DBI, perl-DBD-Pg, gnupg, rrdtool, perl-rrdtool, openvpn <= 2.0.9, openssl, dhclient, iproute, iputils, sendmail, mod_ssl
+Requires: vconfig, xinetd, httpd, perl, php, php-pgsql, perl-DBI, perl-DBD-Pg, gnupg, rrdtool, perl-rrdtool, openvpn, openssl, dhclient, iproute, iputils, sendmail, mod_ssl
 
 %define surfinstall /opt/surfnetids
 %define surfconfig /etc/surfnetids

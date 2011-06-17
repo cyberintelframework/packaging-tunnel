@@ -2,9 +2,9 @@
 
 $svnurl = "http://svn.ids.surfnet.nl/surfids";
 $package = "tunnel";
-$version = "3.02";
+$version = "3.10";
 $subtree = "tags";
-$release = "stable-3.02";
+$release = "stable-3.10";
 
 ##### DO NOT EDIT BELOW
 $sourcedir = "./SOURCES/surfids-$package-$version";
