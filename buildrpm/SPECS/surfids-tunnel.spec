@@ -6,11 +6,15 @@ License: GPL
 Group: Applications/Internet
 Source: surfids-tunnel-3.10.tar.gz
 URL: http://ids.surfnet.nl/
-BuildRoot: /home/build/rpmbuild/surfids-tunnel/BUILDROOT/
+BuildRoot: /root/rpmbuild/BUILD/surfids-tunnel-3.10/
+BuildArch: noarch
 Requires: vconfig, xinetd, httpd, perl, php, php-pgsql, perl-DBI, perl-DBD-Pg, gnupg, rrdtool, perl-rrdtool, openvpn, openssl, dhclient, iproute, iputils, sendmail, mod_ssl
 
 %define surfinstall /opt/surfnetids
 %define surfconfig /etc/surfnetids
+%define surflog /var/log/surfids
+%define builddir %{_topdir}/TMP/surfids-tunnel-3.10
+%define fullpack surfids-tunnel-3.10
 
 %description
 The tunnel component of the SURFids framework.
@@ -18,46 +22,37 @@ The tunnel component of the SURFids framework.
 %prep
 %setup -q
 %install
-rm -rf %{_buildroot}
-# Create surfnetids directories
-install -m 755 -d %{_buildroot}%{surfinstall}
-install -m 755 -d %{_buildroot}%{surfconfig}
-install	-m 755 -d %{_buildroot}/etc/cron.d/
-install	-m 755 -d %{_buildroot}/var/log/
-install	-m 755 -d %{_buildroot}/etc/httpd/conf.d/
-mv -f * %{_buildroot}%{surfinstall}/
-mv -f %{_buildroot}%{surfinstall}/surfnetids-tn.conf %{_buildroot}%{surfconfig}/
-mv -f %{_buildroot}%{surfinstall}/surfnetids-tn-apache.conf %{_buildroot}%{surfconfig}/
-mv -f %{_buildroot}%{surfinstall}/dhclient.conf %{_buildroot}%{surfconfig}/
-mv -f %{_buildroot}%{surfinstall}/openvpn-server.conf %{_buildroot}%{surfconfig}/openvpn.conf
 
-# install important files
-install -m 644 %{_buildroot}%{surfinstall}/tunnel-cron.d %{_buildroot}/etc/cron.d/surfids-tunnel
+install -m 755 -d %{builddir}%{surfinstall}
+install -m 755 -d %{builddir}%{surfconfig}
+install -m 755 -d %{builddir}%{surflog}
+install -m 755 -d %{builddir}/etc/cron.d/
+install -m 755 -d %{builddir}/etc/httpd/conf.d/
+mv -f * %{builddir}%{surfinstall}
+mv -f %{builddir}%{surfinstall}/surfnetids-tn.conf %{builddir}%{surfconfig}/
+mv -f %{builddir}%{surfinstall}/surfnetids-tn-apache.conf %{builddir}%{surfconfig}/
+mv -f %{builddir}%{surfinstall}/dhclient.conf %{builddir}%{surfconfig}/
+mv -f %{builddir}%{surfinstall}/openvpn-server.conf %{builddir}%{surfconfig}/openvpn.conf
+install -m 644 %{builddir}%{surfinstall}/cron.d %{builddir}/etc/cron.d/surfids-tunnel
+
+# Build a manifest of the RPM's directory hierarchy.
+echo "%%defattr(-, root, root)" >MANIFEST
+(cd %{builddir}; find . -type f -or -type l | sed -e s/^.// -e /^$/d) >>MANIFEST
+echo "%{surfinstall}/MANIFEST" >>MANIFEST
+
+mv -f %{builddir}/* .
+mv -f MANIFEST ./%{surfinstall}
 
 %clean
 
 %post
 ln -s %{surfconfig}/surfnetids-tn-apache.conf /etc/httpd/conf.d/surfids-tunnel.conf
 
-%files
-%defattr(-,root,root,-)
-# Directory
-%dir %{surfinstall}
-%dir %{surfconfig}
-%attr(755,apache,adm) %{surfinstall}/clientkeys/
-%attr(755,apache,adm) %{surfinstall}/serverkeys/
-# All it's subcontents
-%{surfinstall}/*
-%config %{surfconfig}/surfnetids-tn.conf
-%config %{surfconfig}/surfnetids-tn-apache.conf
-%config %{surfconfig}/dhclient.conf
-%config %{surfconfig}/openvpn.conf
-# Misc config files
-/etc/cron.d/surfids-tunnel
-# surfids logfile
-%attr(744,apache,adm) /var/log/surfids.log
+%files -f %{_topdir}/BUILD/%{fullpack}/opt/surfnetids/MANIFEST
 
 %changelog
+* Fri Jun 17 2011 SURFids Development Team <ids at, surfnet.nl> 3.10-1
+- SURFids 3.10
 * Wed Aug 26 2009 SURFids Development Team <ids at, surfnet.nl> 3.02-1
 - Fixed bug #176.
 * Fri Aug 21 2009 SURFids Development Team <ids at, surfnet.nl> 3.01-1

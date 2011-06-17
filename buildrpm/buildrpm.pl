@@ -1,26 +1,30 @@
 #!/usr/bin/perl
 
+$buildroot = "/root/rpmbuild";
 $svnurl = "http://svn.ids.surfnet.nl/surfids";
-$package = "tunnel";
+$pack = "tunnel";
+$package = "surfids-tunnel";
 $version = "3.10";
 $subtree = "tags";
 $release = "stable-3.10";
 
-##### DO NOT EDIT BELOW
-$sourcedir = "./SOURCES/surfids-$package-$version";
-
-# Downloading sources
-`svn export $svnurl/$package/$subtree/$release/ $sourcedir/`;
-
-# Deleting obsolete stuff
-`rm -f $sourcedir/install_tn.pl`;
-`rm -f $sourcedir/functions_tn.pl`;
-`rm -f $sourcedir/tunnel_remove.txt`;
-`mv -f $sourcedir/crontab.tn $sourcedir/tunnel-cron.d`;
-
-# Creating .tar.gz
-`tar -cvzf ./SOURCES/surfids-$package-$version.tar.gz $sourcedir/`;
-
-# Building RPM
-`rpmbuild -ba ./SPECS/surfids-$package.spec`;
-
+print "\n##### SVN EXPORT\n";
+chdir("$buildroot/SPECS/");
+$out = `svn export $svnurl/packaging/$pack/trunk/buildrpm/SPECS/$package.spec`;
+print $out;
+chdir("$buildroot/SOURCES/");
+$out = `svn export $svnurl/$pack/$subtree/$release/ ./$package-$version/`;
+print $out;
+$out = `svn export $svnurl/packaging/$pack/trunk/debian/cron.d ./$package-$version/cron.d`;
+print $out;
+print "\n##### CREATING TAR\n";
+$out = `tar -cvzf $package-$version.tar.gz $package-$version/`;
+print $out;
+chdir($buildroot);
+print "\n##### RPMBUILD\n";
+$out = `rpmbuild --define '_topdir $buildroot' -ba SPECS/$package.spec 2>&1`;
+print $out;
+print "\n##### CLEANING UP\n";
+`rm -rf $buildroot/SOURCES/$package-$version/`;
+`rm -rf $buildroot/TMP/$package-$version/`;
+`rm -rf $buildroot/BUILD/$package-$version/`;
