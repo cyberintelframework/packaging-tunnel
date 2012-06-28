@@ -1,6 +1,7 @@
 surfids-tunnel (3.10) lenny; urgency=low
 
   * SURFids 3.10 stable release.
+  * OpenVPN 2.1 support
   * Added IPv6 MitM attack detection to the ethernet modules.
   * Added janitor script to make sure pof and the ethernet detection scripts keep running properly.
   * Added support for APT interaction with the sensor.
